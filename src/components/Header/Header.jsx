@@ -7,14 +7,14 @@ const Header = ({ baseCurrency }) => {
 
   useEffect(() => {
     fetch(
-      `http://api.exchangeratesapi.io/latest?access_key=${API_KEY}&base=${baseCurrency}`
+      `http://api.exchangeratesapi.io/latest?access_key=${API_KEY}&base=EUR`
     )
       .then((res) => res.json())
       .then((data) => {
         if (data.rates) {
           setExchangeRates({
-            USD: data.rates.USD || 0,
-            EUR: data.rates.EUR || 0,
+            USD: (data.rates.USD * data.rates.UAH || 0).toFixed(2),
+            EUR: (data.rates.EUR * data.rates.UAH || 0).toFixed(2),
           });
         } else {
           console.error(
