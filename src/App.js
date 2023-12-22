@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import Converter from "./components/Converter/Converter";
 import Header from "./components/Header/Header";
+import { Equal, SpanFirst, SpanSecond } from "./App.styled";
 
 const API_KEY = "dd3767f7553d65a03398bebbe4d7e2c9";
 const BASE_URL = `http://api.exchangeratesapi.io/latest?access_key=${API_KEY}`;
 
 function App() {
   const [currencyOpts, setCurrencyOpts] = useState([]);
-  const [fromCurrency, setFromCurrency] = useState();
+  const [fromCurrency, setFromCurrency] = useState("EUR");
   const [toCurrency, setToCurrency] = useState();
   const [exchangeRate, setExchangeRate] = useState();
   const [amount, setAmount] = useState(1);
@@ -69,6 +70,8 @@ function App() {
   return (
     <>
       <Header />
+      <SpanFirst>Converter</SpanFirst>
+      <SpanSecond>Converter</SpanSecond>
       <Converter
         currencyOpts={currencyOpts}
         selectedCurrency={fromCurrency}
@@ -76,7 +79,7 @@ function App() {
         onChangeAmount={handleFromAmountChange}
         amount={fromAmount}
       />
-      <div>=</div>
+      <Equal>=</Equal>
       <Converter
         currencyOpts={currencyOpts}
         selectedCurrency={toCurrency}
