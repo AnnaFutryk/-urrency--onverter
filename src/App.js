@@ -8,7 +8,7 @@ const BASE_URL = `http://api.exchangeratesapi.io/latest?access_key=${API_KEY}`;
 
 function App() {
   const [currencyOpts, setCurrencyOpts] = useState([]);
-  const [fromCurrency, setFromCurrency] = useState("EUR");
+  const [fromCurrency, setFromCurrency] = useState();
   const [toCurrency, setToCurrency] = useState();
   const [exchangeRate, setExchangeRate] = useState();
   const [amount, setAmount] = useState(1);
