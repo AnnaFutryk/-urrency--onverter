@@ -1,3 +1,5 @@
+import { Input, Select } from "./Converter.styled";
+
 const Converter = (props) => {
   const {
     currencyOpts,
@@ -8,14 +10,14 @@ const Converter = (props) => {
   } = props;
   return (
     <>
-      <input type="number" value={amount} onChange={onChangeAmount} />
-      <select value={selectedCurrency} onChange={onChangeCurrency}>
+      <Input type="number" value={amount} onChange={onChangeAmount} />
+      <Select value={selectedCurrency} onChange={onChangeCurrency}>
         {currencyOpts.map((option) => (
           <option key={option} value={option}>
             {option}
           </option>
         ))}
-      </select>
+      </Select>
     </>
   );
 };

@@ -20,4 +20,5 @@ export const List = styled.ul`
   list-style-type: none;
   display: flex;
   gap: 30px;
+  color: lightgrey;
 `;
