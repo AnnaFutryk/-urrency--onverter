@@ -75,7 +75,7 @@ function App() {
         selectedCurrency={fromCurrency}
         onChangeCurrency={(e) => setFromCurrency(e.target.value)}
         onChangeAmount={handleFromAmountChange}
-        amount={fromAmount || 0}
+        amount={fromAmount}
       />
       <Equal>=</Equal>
       <Converter
@@ -83,7 +83,7 @@ function App() {
         selectedCurrency={toCurrency}
         onChangeCurrency={(e) => setToCurrency(e.target.value)}
         onChangeAmount={handleToAmountChange}
-        amount={toAmount || 0}
+        amount={toAmount}
       />
     </>
   );
