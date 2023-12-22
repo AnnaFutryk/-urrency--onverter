@@ -12,16 +12,16 @@ function App() {
   const [toCurrency, setToCurrency] = useState();
   const [exchangeRate, setExchangeRate] = useState();
   const [amount, setAmount] = useState(1);
-  const [amountInFromCurrency, setAmmountInFromCurrency] = useState(true);
+  const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
 
   let toAmount, fromAmount;
-  if (exchangeRate !== undefined && amount !== undefined) {
+  if (exchangeRate && amount) {
     if (amountInFromCurrency) {
-      fromAmount = amount;
       toAmount = amount * exchangeRate;
+      fromAmount = amount;
     } else {
-      toAmount = amount;
       fromAmount = amount / exchangeRate;
+      toAmount = amount;
     }
   }
 
@@ -39,17 +39,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (fromCurrency !== undefined && toCurrency !== undefined) {
+    if (fromCurrency && toCurrency) {
       fetch(`${BASE_URL}&base=${fromCurrency}&symbols=${toCurrency}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.rates && data.rates[toCurrency] !== undefined) {
             setExchangeRate(data.rates[toCurrency]);
-          } else {
-            console.error(
-              "Invalid response format or missing exchange rate data:",
-              data
-            );
           }
         })
         .catch((error) =>
@@ -57,14 +52,15 @@ function App() {
         );
     }
   }, [fromCurrency, toCurrency]);
+
   function handleFromAmountChange(e) {
     setAmount(e.target.value);
-    setAmmountInFromCurrency(true);
+    setAmountInFromCurrency(true);
   }
 
   function handleToAmountChange(e) {
     setAmount(e.target.value);
-    setAmmountInFromCurrency(false);
+    setAmountInFromCurrency(false);
   }
 
   return (
@@ -77,7 +73,7 @@ function App() {
         selectedCurrency={fromCurrency}
         onChangeCurrency={(e) => setFromCurrency(e.target.value)}
         onChangeAmount={handleFromAmountChange}
-        amount={fromAmount}
+        amount={fromAmount || 0}
       />
       <Equal>=</Equal>
       <Converter
@@ -85,7 +81,7 @@ function App() {
         selectedCurrency={toCurrency}
         onChangeCurrency={(e) => setToCurrency(e.target.value)}
         onChangeAmount={handleToAmountChange}
-        amount={toAmount}
+        amount={toAmount || 0}
       />
     </>
   );
